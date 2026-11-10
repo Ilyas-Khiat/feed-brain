@@ -279,6 +279,30 @@ those will would could should been being some such only other over very""".split
 WORD_RE = re.compile(r"[a-z0-9]{3,}")
 
 
+# Git rules for a vault synced by several computers (git_sync). Every run adds to _log.md and
+# rewrites _catalog.md, so two computers editing them at once must keep both sides instead of
+# conflicting; the catalog is rebuilt from the notes after each pull anyway.
+VAULT_GIT_FILES = {
+    ".gitattributes": ("# Every run rewrites these; with several computers syncing, keep both sides instead of conflicting.\n"
+                       "# The server rebuilds _catalog.md from the notes after each pull anyway.\n",
+                       ["_log.md merge=union", "_catalog.md merge=union"]),
+    ".gitignore": ("# Per-device Obsidian state, and plugin settings (some plugins keep API keys there)\n",
+                   [".obsidian/workspace*.json", ".trash/", ".obsidian/plugins/*/data.json"]),
+}
+
+
+def ensure_vault_git_files():
+    """Add the sync rules the vault is missing, keeping whatever its files already say."""
+    for name, (comment, rules) in VAULT_GIT_FILES.items():
+        path = VAULT / name
+        text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
+        missing = [r for r in rules if r not in {line.strip() for line in text.splitlines()}]
+        if missing:
+            sep = "" if not text else ("\n" if text.endswith("\n") else "\n\n")
+            write_text(path, text + sep + comment + "".join(r + "\n" for r in missing))
+            log(f"vault: added {', '.join(missing)} to {name}")
+
+
 def bootstrap_vault():
     """Create the layout on first start. Never overwrites schema.md once it exists."""
     for folder in (*NOTE_DIRS.values(), CONCEPTS):
@@ -287,6 +311,7 @@ def bootstrap_vault():
         shutil.copyfile(ROOT / "schema.md", SCHEMA)
     if not LOG.exists():
         write_text(LOG, LOG_HEADER)
+    ensure_vault_git_files()
     write_catalog()
 
 

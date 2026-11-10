@@ -60,7 +60,7 @@ On a conflict (the same note edited on two devices), it never forces anything. I
 
 **Reading on another laptop or a phone:** clone the vault repo and open it in Obsidian with the community **Git** plugin: turn on *Pull on startup*, and set *Auto pull interval* and *Auto commit-and-sync interval* to 10 minutes. On Android, give the plugin a GitHub fine-grained token limited to the vault repo, with *Contents: Read and write*.
 
-**A second computer that also captures:** set it up like the first (Claude Code, Python, Chrome, this repo), with `vault_path` pointing to its clone of the vault. Both computers then push to the same vault. Run logs and the catalog merge automatically, and each commit names the computer that made it. The one real conflict is both computers updating the same concept within the same few minutes: you'd see it as a warning, and nothing gets overwritten.
+**A second computer that also captures:** set it up like the first (Claude Code, Python, Chrome, this repo), with `vault_path` pointing to its clone of the vault. Both computers then push to the same vault. Run logs and the catalog merge automatically: on its first start the server adds `merge=union` rules for `_log.md` and `_catalog.md` to the vault's `.gitattributes` (and per-device Obsidian files to its `.gitignore`), and it rebuilds the catalog after every pull. Each commit names the computer that made it. The one real conflict is both computers updating the same concept within the same few minutes: you'd see it as a warning, and nothing gets overwritten.
 
 Where the server runs, don't turn on the Git plugin's auto commit: the server already does it, and the two would collide.
 
