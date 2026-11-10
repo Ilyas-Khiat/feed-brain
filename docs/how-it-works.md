@@ -60,6 +60,8 @@ feed-brain/                     (this folder: the code)
 │  └─ data/                     captures.jsonl: one line per capture (your usage log)
 │                               asks.jsonl: every "Ask the brain" answer
 ├─ docs/                        these pages and the README screenshots
+├─ tools/                       dev_server.py (a throwaway server on a vault copy), screenshots/
+├─ CLAUDE.md                    rules for Claude Code sessions working on this repo
 ├─ examples/                    sample output from test runs
 └─ discovery/                   product-discovery notes, written before the code
 ```

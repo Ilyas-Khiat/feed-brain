@@ -145,6 +145,7 @@ Needs Windows, Python 3.10+, Chrome and [Claude Code](https://docs.claude.com/en
 - [How it works](docs/how-it-works.md): a run step by step, the checks, the sandbox, the project layout
 - [LinkedIn and X posts](docs/sources.md): capture, post notes, X articles, pictures, adding a source
 - [The web app](docs/web-app.md): dashboard, graph, search syntax, Ask the brain
+- [Developing Feed Brain](docs/development.md): a safe dev server, the headless Claude contract, platform traps, screenshots and numbers
 - [Roadmap](ROADMAP.md)
 
 ## Responsible use

@@ -1,0 +1,118 @@
+[
+ {
+  "name": "graph-dark",
+  "path": "#/graph",
+  "theme": "dark",
+  "wait": 7000
+ },
+ {
+  "name": "dashboard-dark",
+  "path": "#/",
+  "theme": "dark",
+  "height": 3200,
+  "wait": 4000,
+  "clip": {
+   "x": 64,
+   "y": 455,
+   "width": 1312,
+   "height": 1292
+  }
+ },
+ {
+  "name": "note-dark",
+  "path": "#/search?q=skill%20library",
+  "theme": "dark",
+  "wait": 3000,
+  "steps": [
+   {
+    "js": "(()=>{const r=[...document.querySelectorAll(\".result\")].find(e=>e.textContent.includes(\"Anthropic engineers give one agent\"));if(!r)return \"no such result\";r.click();return \"ok\"})()",
+    "log": true,
+    "wait": 2000
+   }
+  ]
+ },
+ {
+  "name": "ask-dark",
+  "path": "#/search?mode=ask",
+  "theme": "dark",
+  "height": 1400,
+  "wait": 3000,
+  "clip": {
+   "x": 64,
+   "y": 206,
+   "width": 1312,
+   "height": 704
+  },
+  "steps": [
+   {
+    "js": "(()=>{const q=[...document.querySelectorAll(\".ask-history .title\")].find(e=>e.textContent.trim()===\"what was that video about wifi\");if(!q)return \"no such question\";q.click();return \"ok\"})()",
+    "log": true,
+    "wait": 1500
+   }
+  ]
+ },
+ {
+  "name": "search-dark",
+  "path": "#/search?q=type%3Aclaim%20agents",
+  "theme": "dark",
+  "wait": 3000
+ },
+ {
+  "name": "graph-light",
+  "path": "#/graph",
+  "theme": "light",
+  "wait": 7000
+ },
+ {
+  "name": "dashboard-light",
+  "path": "#/",
+  "theme": "light",
+  "height": 3200,
+  "wait": 4000,
+  "clip": {
+   "x": 64,
+   "y": 455,
+   "width": 1312,
+   "height": 1292
+  }
+ },
+ {
+  "name": "note-light",
+  "path": "#/search?q=skill%20library",
+  "theme": "light",
+  "wait": 3000,
+  "steps": [
+   {
+    "js": "(()=>{const r=[...document.querySelectorAll(\".result\")].find(e=>e.textContent.includes(\"Anthropic engineers give one agent\"));if(!r)return \"no such result\";r.click();return \"ok\"})()",
+    "log": true,
+    "wait": 2000
+   }
+  ]
+ },
+ {
+  "name": "ask-light",
+  "path": "#/search?mode=ask",
+  "theme": "light",
+  "height": 1400,
+  "wait": 3000,
+  "clip": {
+   "x": 64,
+   "y": 206,
+   "width": 1312,
+   "height": 704
+  },
+  "steps": [
+   {
+    "js": "(()=>{const q=[...document.querySelectorAll(\".ask-history .title\")].find(e=>e.textContent.trim()===\"what was that video about wifi\");if(!q)return \"no such question\";q.click();return \"ok\"})()",
+    "log": true,
+    "wait": 1500
+   }
+  ]
+ },
+ {
+  "name": "search-light",
+  "path": "#/search?q=type%3Aclaim%20agents",
+  "theme": "light",
+  "wait": 3000
+ }
+]
