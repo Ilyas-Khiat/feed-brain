@@ -83,11 +83,23 @@ They come from `server/data/captures.jsonl` (one line per capture: kind, status,
 server/.venv/Scripts/python -c "import json,statistics as s; r=[json.loads(l) for l in open('server/data/captures.jsonl',encoding='utf-8')]; v=[x for x in r if x.get('kind') in (None,'video') and x.get('status')=='done']; print(len(v), s.median(x['cost_usd'] for x in v), s.median(x['seconds'] for x in v))"
 ```
 
+## Running the tests
+
+```bash
+server/.venv/Scripts/python -m pip install -r server/requirements-dev.txt
+```
+
+```bash
+server/.venv/Scripts/python -m pytest
+```
+
+The tests in `tests/` make no Claude calls and use no network, so they're free and take a few seconds. They cover search (BM25F ranking, stemming, completion, typo correction, every query filter), Louvain clusters, Ask's relevance ranking, note parsing, timestamp links, the catalog, the vault's git rules, the checks after a run, how LinkedIn and X posts are cleaned, the `sources.py` table, and git sync between two clones of one vault (skipped without `git`). `tests/conftest.py` sets `FEED_BRAIN_CONFIG` and `FEED_BRAIN_DATA` before importing `brain_server.py`, so the tests never read `server/config.json`, never write to `server/data/` and never see your vault; each test gets its own vault in a temp folder. GitHub Actions runs them on Ubuntu and Windows, Python 3.10 and 3.12, plus `node --check` on every script in `extension/` and `server/web/` ([`.github/workflows/tests.yml`](../.github/workflows/tests.yml)).
+
 ## Checking a change
 
-There are no automated tests yet. Before committing:
+Before committing:
 
-1. `server/.venv/Scripts/python -m py_compile server/*.py` and `node --check` on any changed `.js` file.
+1. `server/.venv/Scripts/python -m pytest`, `server/.venv/Scripts/python -m py_compile server/*.py` and `node --check` on any changed `.js` file.
 2. Start a dev server and open the dashboard, the graph and a search.
 3. For a change to a run or a prompt: capture one short video on the dev server (`--model sonnet` to keep it cheap), then read the note and the warnings in the popup.
 4. For the extension: reload it in `chrome://extensions`, then send a video and a post.

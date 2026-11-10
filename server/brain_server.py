@@ -39,7 +39,10 @@ from brain_index import BrainIndex, cited, parse_frontmatter, split_frontmatter
 from sources import KIND_OF_FOLDER, SOURCES
 
 ROOT = Path(__file__).resolve().parent
-DATA = ROOT / "data"
+# FEED_BRAIN_CONFIG and FEED_BRAIN_DATA point a copy of the server elsewhere: the tests set them
+# (tests/conftest.py), so importing this file never reads the real config or writes to server/data.
+CONFIG_PATH = Path(os.environ.get("FEED_BRAIN_CONFIG") or ROOT / "config.json")
+DATA = Path(os.environ.get("FEED_BRAIN_DATA") or ROOT / "data")
 DATA.mkdir(exist_ok=True)
 
 DEFAULTS = {
@@ -63,9 +66,8 @@ DEFAULTS = {
 
 def load_config():
     cfg = dict(DEFAULTS)
-    path = ROOT / "config.json"
-    if path.exists():
-        cfg.update(json.loads(path.read_text(encoding="utf-8")))
+    if CONFIG_PATH.exists():
+        cfg.update(json.loads(CONFIG_PATH.read_text(encoding="utf-8")))
     cfg["vault_path"] = str(Path(cfg["vault_path"]).expanduser())
     cfg["vault_name"] = cfg["vault_name"] or Path(cfg["vault_path"]).name
     return cfg

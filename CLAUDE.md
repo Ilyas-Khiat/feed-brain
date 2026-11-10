@@ -11,6 +11,7 @@ A Chrome extension and a local Python server that turn YouTube videos and Linked
 - `server/web/`: plain ES modules and SVG, no framework, no build.
 - `extension/`: Manifest V3. `linkedin.js` and `x.js` know each site's page layout.
 - `tools/dev_server.py`, `tools/screenshots/`: a throwaway server on a vault copy, and the README screenshots.
+- `tests/`: pytest over the pure logic; `conftest.py` keeps `brain_server` away from the real config, data and vault.
 
 ## Rules
 
@@ -23,4 +24,4 @@ A Chrome extension and a local Python server that turn YouTube videos and Linked
 
 ## Checking a change
 
-`server/.venv/Scripts/python -m py_compile server/*.py`, `node --check` on changed JS, then the dev server: dashboard, graph, a search. For prompt or run changes, one cheap capture on the dev server (`--model sonnet`). There are no automated tests yet.
+`server/.venv/Scripts/python -m pytest` (no Claude calls, no network; `pip install -r server/requirements-dev.txt` first), `node --check` on changed JS, then the dev server: dashboard, graph, a search. For prompt or run changes, one cheap capture on the dev server (`--model sonnet`). New pure logic gets a test in `tests/`; never build a fixture from the real vault.

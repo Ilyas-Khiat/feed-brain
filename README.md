@@ -7,6 +7,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/Ilyas-Khiat/feed-brain/actions/workflows/tests.yml"><img alt="Tests" src="https://github.com/Ilyas-Khiat/feed-brain/actions/workflows/tests.yml/badge.svg"></a>
   <img alt="Runs on Claude Code" src="https://img.shields.io/badge/runs_on-Claude_Code-D97757">
   <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB">
   <img alt="Chrome extension, Manifest V3" src="https://img.shields.io/badge/chrome-Manifest_V3-4285F4">
