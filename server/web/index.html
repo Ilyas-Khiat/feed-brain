@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feed Brain</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23201d2e'/%3E%3Ccircle cx='11' cy='12' r='3.5' fill='%233987e5'/%3E%3Ccircle cx='22' cy='10' r='2.5' fill='%23ecebf3'/%3E%3Ccircle cx='19' cy='22' r='4' fill='%23eb6834'/%3E%3Cpath d='M11 12 22 10M11 12l8 10M22 10l-3 12' stroke='%23ecebf3' stroke-width='1.2' opacity='.7'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#/">
+      <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><rect width="32" height="32" rx="8" class="brand-bg"/><circle cx="11" cy="12" r="3.5" fill="#3987e5"/><circle cx="22" cy="10" r="2.5" class="brand-dot"/><circle cx="19" cy="22" r="4" fill="#eb6834"/><path d="M11 12 22 10M11 12l8 10M22 10l-3 12" class="brand-line"/></svg>
+      <span>Feed Brain</span>
+    </a>
+    <nav class="tabs" aria-label="Views">
+      <a href="#/" data-view="dashboard">Dashboard</a>
+      <a href="#/graph" data-view="graph">Graph</a>
+      <a href="#/search" data-view="search">Search</a>
+    </nav>
+    <form id="quick" class="quick" role="search">
+      <input id="quick-q" type="search" placeholder="Search your brain…" autocomplete="off" spellcheck="false" aria-label="Search your brain">
+      <kbd>/</kbd>
+    </form>
+    <span id="status" class="status" aria-live="polite"><i></i><span>connecting…</span></span>
+    <button id="theme" class="icon-btn" type="button" title="Switch light / dark" aria-label="Switch light or dark theme">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3a7 7 0 0 1 0 14z" fill="currentColor"/></svg>
+    </button>
+  </header>
+
+  <main id="view"></main>
+
+  <aside id="drawer" class="drawer" aria-label="Note" hidden>
+    <div class="drawer-bar">
+      <button id="drawer-back" class="icon-btn" type="button" title="Back" aria-label="Back" hidden>←</button>
+      <span id="drawer-kind" class="drawer-kind"></span>
+      <button id="drawer-close" class="icon-btn" type="button" title="Close (Esc)" aria-label="Close">×</button>
+    </div>
+    <div id="drawer-body" class="drawer-body"></div>
+  </aside>
+
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

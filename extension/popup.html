@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Feed Brain</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="icons/icon32.png" alt="" width="20" height="20">
+    <h1>Feed Brain</h1>
+    <span id="server" class="server" title="Brain server status"><i></i><span>checking…</span></span>
+  </header>
+
+  <section class="current">
+    <p id="video" class="video muted">Looking at this tab…</p>
+    <textarea id="focus" rows="2" placeholder="Focus (optional), e.g. &quot;only the eval part&quot; or &quot;is this better than BM25?&quot;"></textarea>
+    <div class="row">
+      <button id="send" disabled>Spoil it into my vault</button>
+      <span class="hint">Alt+Shift+Y</span>
+    </div>
+    <p id="message" class="message" hidden></p>
+  </section>
+
+  <section id="site" class="site" hidden>
+    <h2 id="site-name"></h2>
+    <label><input type="checkbox" id="site-save"> <span id="site-save-text"></span></label>
+    <label><input type="checkbox" id="site-react"> <span id="site-react-text"></span></label>
+    <p id="site-status" class="muted small"></p>
+  </section>
+
+  <form id="find" class="find" role="search">
+    <input id="find-q" type="search" placeholder="Search your brain…" autocomplete="off" aria-label="Search your brain">
+    <a id="dashboard" href="#" title="Dashboard, graph and search">Dashboard ↗</a>
+  </form>
+
+  <section>
+    <h2>Recent</h2>
+    <ul id="jobs" class="jobs"></ul>
+    <p id="empty" class="muted small">Nothing yet. Open a video and hit the button.</p>
+  </section>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

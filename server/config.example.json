@@ -1,0 +1,20 @@
+{
+  "vault_path": "~/Documents/feed-brain",
+  "vault_name": "feed-brain",
+  "port": 8765,
+  "model": "opus",
+  "post_model": "sonnet",
+  "language": "English",
+  "transcript_languages": [
+    "en",
+    "fr"
+  ],
+  "web_check": true,
+  "catalog_limit": 300,
+  "timeout_minutes": 20,
+  "claude_path": null,
+  "git_sync": true,
+  "git_sync_minutes": 10,
+  "ask_model": "sonnet",
+  "ask_max_turns": 12
+}

@@ -1,0 +1,6 @@
+# Per-computer state
+server/.venv/
+server/data/
+server/config.json
+__pycache__/
+*.pyc

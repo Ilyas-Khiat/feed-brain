@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Feed Brain",
+  "version": "0.5.0",
+  "description": "Send the current YouTube video, or the posts you save and react to on LinkedIn and X, to your Obsidian vault as short, cross-referenced notes.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Send this to your brain",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["activeTab", "storage", "notifications", "alarms", "contextMenus", "scripting"],
+  "host_permissions": ["http://127.0.0.1:8765/*", "https://www.linkedin.com/*", "https://x.com/*", "https://twitter.com/*"],
+  "content_scripts": [
+    { "matches": ["https://www.linkedin.com/*"], "js": ["capture.js", "linkedin.js"], "run_at": "document_idle" },
+    { "matches": ["https://x.com/*", "https://twitter.com/*"], "js": ["capture.js", "x.js"], "run_at": "document_idle" }
+  ],
+  "commands": {
+    "capture": {
+      "suggested_key": { "default": "Alt+Shift+Y" },
+      "description": "Send the current video or post to your brain"
+    }
+  }
+}
