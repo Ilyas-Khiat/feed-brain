@@ -75,6 +75,20 @@ node tools/screenshots/shoot.mjs tools/screenshots/readme.json docs/images
 
 `readme.json` lists each shot: the route, the theme, the viewport, an optional crop, and JavaScript steps such as clicking a search result. Two shots target things that exist only in the author's vault (a note about Claude skills and a saved Ask answer about WiFi). Change those steps for your own vault: a step that finds nothing logs it. `BASE` and `CHROME` env variables change the server address and Chrome's path.
 
+The demo at the top of the README is recorded the same way, from a script of steps (open a route, click, type key by key, press Enter, wait until the page is ready, scroll). It captures Chrome's screencast frames with their real timing, then ffmpeg makes the GIF (12 fps, 960 px, 128 colours) and an MP4. Its last step is a live *Ask the brain* question, so a recording costs one question of plan usage.
+
+```bash
+node tools/screenshots/record.mjs tools/screenshots/demo.json FRAMES
+```
+
+```bash
+ffmpeg -f concat -safe 0 -i FRAMES/frames.txt -vf "setpts=PTS/1.25,fps=12,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle" docs/images/demo.gif
+```
+
+```bash
+ffmpeg -f concat -safe 0 -i FRAMES/frames.txt -vf "setpts=PTS/1.25,fps=30,scale=1280:-2" -c:v libx264 -pix_fmt yuv420p -crf 23 -movflags +faststart docs/images/demo.mp4
+```
+
 ## Evaluating Ask
 
 `tools/ask_eval.py` runs questions with known answers against a dev server and records every tool call. It scores the gold facts found, the required notes cited (with the server's own citation parser), the notes opened, and the link hops: notes opened right after reading a note that links to them. The set in `evals/ask/` is written for the author's vault; [its report](../evals/ask/README.md) has the method, results and limits. Two habits:

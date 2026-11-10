@@ -15,12 +15,11 @@
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-green">
 </p>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/graph-dark.png">
-  <img alt="The knowledge graph: 158 concepts, 53 videos and 31 posts, grouped into 23 topics found from the links between notes" src="docs/images/graph-light.png">
-</picture>
+<p align="center">
+  <img alt="Demo: the dashboard, the topic graph, a claim search typed live, then Ask the brain answering a question from three sources while the page shows each note it reads" src="docs/images/demo.gif">
+</p>
 
-<p align="center"><sub>My own vault after seven weeks: 53 videos, 31 posts and 158 concepts, in 23 topics the app found from the links between notes.</sub></p>
+<p align="center"><sub>Real run on my own vault: the dashboard, the topic graph, a search down to single claims, then <i>Ask the brain</i> answering from three sources while the page shows each note it reads (sped up 1.25×).</sub></p>
 
 ## Why I built it
 
@@ -40,6 +39,17 @@ I watch a lot of technical video as a first pass before reading papers, and with
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/note-dark.png">
   <img alt="Search results for 'skill library', with a video note open in the side panel: spoiler, verdict chips and key claims with timestamps" src="docs/images/note-light.png">
 </picture>
+
+### The graph
+
+Every concept, video and post, linked the way the notes link each other. Topics are found from those links (Louvain), and each topic gets its own area, placed so that linked topics sit close.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/graph-dark.png">
+  <img alt="The knowledge graph: 158 concepts, 53 videos and 31 posts, grouped into 23 topics found from the links between notes" src="docs/images/graph-light.png">
+</picture>
+
+<p align="center"><sub>My own vault after seven weeks: 53 videos, 31 posts and 158 concepts, in 23 topics.</sub></p>
 
 ### Ask the brain
 

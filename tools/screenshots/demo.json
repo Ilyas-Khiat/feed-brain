@@ -1,0 +1,16 @@
+{
+ "width": 1280, "height": 760, "theme": "dark",
+ "steps": [
+  {"go": "#/"}, {"wait": 2600},
+  {"scroll": 470, "ms": 1400}, {"wait": 2200},
+  {"go": "#/graph"}, {"wait": 5200},
+  {"click": ".cluster-list li:nth-child(4)"}, {"wait": 3000},
+  {"go": "#/search"}, {"wait": 700},
+  {"type": "#search-q", "text": "type:claim agents", "delay": 85}, {"wait": 2800},
+  {"go": "#/search?mode=ask"}, {"wait": 900},
+  {"type": "#search-q", "text": "Three things I saved are about cheap models that only pick from a fixed list of answers. What is each one, and what does the trading desk use it for?", "delay": 18},
+  {"wait": 500}, {"key": "Enter"},
+  {"until": "!!document.querySelector('.ask-sources ol li')", "timeout": 120000},
+  {"wait": 1500}, {"scroll": 380, "ms": 1600}, {"wait": 3500}
+ ]
+}
