@@ -968,7 +968,9 @@ def cited(answer, notes):
     `notes` is Snapshot.note_refs(); links to notes that don't exist are left out."""
     out = {}
     for path, ts in CITE_LINK_RE.findall(answer):
-        note = f"{path.strip()}.md"
+        # Claude often cites a note by its title, and a title can end with "." while a Windows
+        # file name can't ("Your WiFi Can See You. Here's How." is "…Here's How.md").
+        note = f"{path.strip().rstrip('. ')}.md"
         if note in notes:
             entry = out.setdefault(note, dict(notes[note], ts=[]))
             if ts and ts not in entry["ts"]:

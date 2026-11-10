@@ -11,6 +11,7 @@ A Chrome extension and a local Python server that turn YouTube videos and Linked
 - `server/web/`: plain ES modules and SVG, no framework, no build.
 - `extension/`: Manifest V3. `linkedin.js` and `x.js` know each site's page layout.
 - `tools/dev_server.py`, `tools/screenshots/`: a throwaway server on a vault copy, and the README screenshots.
+- `tools/ask_eval.py`, `evals/ask/`: the Ask evaluation (questions with gold facts, every answer and tool call, the report). Re-score saved answers with `--rescore` after a parser change; re-asking costs plan usage.
 - `tests/`: pytest over the pure logic; `conftest.py` keeps `brain_server` away from the real config, data and vault.
 
 ## Rules

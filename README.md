@@ -80,6 +80,7 @@ Measured on my own vault, from the server's run log (November 2026):
 | A post run (Sonnet) | median **22 s** and **$0.11** (LinkedIn) to **$0.13** (X) over 31 runs |
 | Search | 16–50 ms over every note and claim, in pure Python |
 | Ask the brain | 8–22 s per answer. A first question costs about $0.10; follow-ups cost $0.02–0.04, with 96–97% of their input served from the prompt cache |
+| Ask, multi-hop evaluation | **41/41** gold facts and **22/25** required notes cited on 12 questions with known answers, $0.63 in all ([details](evals/ask/README.md)) |
 
 ## How it works
 
@@ -118,7 +119,9 @@ The interesting part of this project is less the LLM call than what's built arou
 
 **Treat every source as hostile.** Transcripts and posts are untrusted input, so each run is boxed in. Claude's working folder is the vault and nothing else. Its tools are an allowlist (Read, Edit, Write, Glob, Grep, plus WebSearch when needed): no shell, no WebFetch, no MCP servers, and no user settings (`--strict-mcp-config`, `--setting-sources project,local`). Post pictures are downloaded only from the platforms' own image servers, checked to be real images, kept outside the vault and deleted after the run. *Ask the brain* gets read-only tools.
 
-**Agentic retrieval instead of embeddings.** *Ask the brain* has no vector store. Sonnet gets the catalog (one line per note and concept, with each video's spoiler) and the 8 best BM25F matches for the question, then decides what to read with read-only tools. It can open notes, follow their links (a concept's "Seen in" videos and posts, a video's concepts) and grep for exact words, within 12 steps. The catalog is the system prompt, so it's cached between questions: follow-ups cost 3 to 5 times less than the first question. Every point in the answer is cited, and the page shows each note as it's read. In practice the catalog does most of the work. On the questions asked so far, Claude opened at most one note per answer, so link-following is built in but not yet shown on real questions. The catalog also goes into every question whole (about 22k tokens for this vault), which suits a personal vault but would need the same relevance filter as capture past a thousand or so notes.
+**Agentic retrieval instead of embeddings.** *Ask the brain* has no vector store. Sonnet gets the catalog (one line per note and concept, with each video's spoiler) and the 8 best BM25F matches for the question, then decides what to read with read-only tools. It can open notes, follow their links (a concept's "Seen in" videos and posts, a video's concepts) and grep for exact words, within 12 steps. The catalog is the system prompt, so it's cached between questions: follow-ups cost 3 to 5 times less than the first question. Every point in the answer is cited, and the page shows each note as it's read.
+
+**Measured, not assumed.** An [evaluation of 12 questions with known answers](evals/ask/README.md) checks whether Ask can combine notes when the catalog doesn't say which ones. The answers contained **41 of 41** gold facts and cited **22 of 25** required source notes, for **$0.63** in total (median 10 s and $0.04 per question). Four questions were solved by following the vault's own links: concept note → the videos and posts it lists. A tool the catalog never names was found through the concept note that two sources share, and a contradiction was spotted between an X post and a LinkedIn post. The evaluation also found a real bug: citations to titles ending with a period were dropped. It's fixed, with a test. Everyday questions are usually simpler: most are answered from the catalog plus one note. The catalog also goes into every question whole (about 22k tokens for this vault), which suits a personal vault but would need the same relevance filter as capture past a thousand or so notes.
 
 **Several laptops, no backend.** The vault is a git repo, and every computer running the server syncs it before and after each run and every 10 minutes: commit, rebase onto the others' work, push. The run log merges with git's union driver, and the catalog is treated as derived state: it's rebuilt from the notes after every pull, whatever the merge did. Nothing is ever force-pushed: a real conflict (two laptops editing the same concept within minutes) keeps the commits local and shows a warning.
 
@@ -147,6 +150,7 @@ Needs Windows, Python 3.10+, Chrome and [Claude Code](https://docs.claude.com/en
 - [LinkedIn and X posts](docs/sources.md): capture, post notes, X articles, pictures, adding a source
 - [The web app](docs/web-app.md): dashboard, graph, search syntax, Ask the brain
 - [Developing Feed Brain](docs/development.md): a safe dev server, the headless Claude contract, platform traps, screenshots and numbers
+- [Ask the brain evaluation](evals/ask/README.md): 12 multi-hop questions with known answers, the paths Claude took, and the bug it found
 - [Roadmap](ROADMAP.md)
 
 ## Responsible use

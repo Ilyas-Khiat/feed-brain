@@ -75,6 +75,14 @@ node tools/screenshots/shoot.mjs tools/screenshots/readme.json docs/images
 
 `readme.json` lists each shot: the route, the theme, the viewport, an optional crop, and JavaScript steps such as clicking a search result. Two shots target things that exist only in the author's vault (a note about Claude skills and a saved Ask answer about WiFi). Change those steps for your own vault: a step that finds nothing logs it. `BASE` and `CHROME` env variables change the server address and Chrome's path.
 
+## Evaluating Ask
+
+`tools/ask_eval.py` runs questions with known answers against a dev server and records every tool call. It scores the gold facts found, the required notes cited (with the server's own citation parser), the notes opened, and the link hops: notes opened right after reading a note that links to them. The set in `evals/ask/` is written for the author's vault; [its report](../evals/ask/README.md) has the method, results and limits. Two habits:
+- **Write the gold facts before the first run**, from the notes, never from the answers.
+- **Read every answer.** The regexes are a first pass. Spot-check numbers and timestamps against the notes, because a fact can come from a concept note's summary of a source, not the source note itself.
+
+After changing the citation parser or the scorer, score the saved answers again with `--rescore` rather than asking again.
+
 ## Numbers in the README
 
 They come from `server/data/captures.jsonl` (one line per capture: kind, status, cost, seconds) and `asks.jsonl` (one per question: steps, notes read, tokens in and from cache, cost). Medians, not averages, and say how many runs. For example:

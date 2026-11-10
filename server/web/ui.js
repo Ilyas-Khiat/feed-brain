@@ -375,7 +375,8 @@ export function inline(text, opts = {}) {
       const cite = opts.cite && target.match(CITE_TARGET_RE);
       if (cite) {
         if (m[5]) out.push(document.createTextNode(`${m[5]} `));
-        out.push(opts.cite([{ ref: `${cite[1].trim()}.md`, ts: cite[2] }]));
+        // A title can end with "." but a Windows file name can't: "…Here's How." is "…Here's How.md".
+        out.push(opts.cite([{ ref: `${cite[1].trim().replace(/[. ]+$/, "")}.md`, ts: cite[2] }]));
       } else {
         out.push(/^[\w-]+\//.test(target)
           ? el("a", { href: "#", class: "wikilink", onclick: (e) => { e.preventDefault(); openNote(`${target}.md`); } }, label)

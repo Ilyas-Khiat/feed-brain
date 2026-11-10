@@ -1,0 +1,585 @@
+{
+ "heretic": {
+  "question": "There's a tool that shows up both in a video and in a post I saved about removing refusals from AI models. What is it, and what did the post say the whole thing cost in time and money?",
+  "kind": "bridge (entity not in catalog)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "posts/Pasan Gimhana - For about 5 and 5½ minutes, you can strip almost.md"
+   },
+   {
+    "tool": "Read",
+    "target": "concepts/Abliteration.md"
+   }
+  ],
+  "answer": "The tool is **Heretic** (by p-e-w). The Fireship video **PewDiePie is setting AI free... and OpenAI is furious** says it auto-finds the \"obliteration parameters\" and strips them to uncensor the model [[videos/PewDiePie is setting AI free... and OpenAI is furious@02:04]]. Pasan Gimhana's LinkedIn post credits it for the layer search [[posts/Pasan Gimhana - For about 5 and 5½ minutes, you can strip almost]].\n\nOn cost, the post says the whole run took about **5 minutes (5½ at most) and roughly $5** on an A6000 GPU [[posts/Pasan Gimhana - For about 5 and 5½ minutes, you can strip almost]]. That covers about 300 forward passes and rewriting 97 weight tensors, with no training [[posts/Pasan Gimhana - For about 5 and 5½ minutes, you can strip almost]]. These figures are self-reported and unverified [[posts/Pasan Gimhana - For about 5 and 5½ minutes, you can strip almost]].\n\nThe technique itself is covered in [[concepts/Abliteration]].",
+  "score": {
+   "facts_found": 4,
+   "facts_total": 4,
+   "facts": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "required_cited": 2,
+   "required_total": 2,
+   "missing_notes": [],
+   "cited": [
+    "videos/PewDiePie is setting AI free... and OpenAI is furious.md",
+    "posts/Pasan Gimhana - For about 5 and 5½ minutes, you can strip almost.md",
+    "concepts/Abliteration.md"
+   ],
+   "opened": [
+    "posts/Pasan Gimhana - For about 5 and 5½ minutes, you can strip almost.md",
+    "concepts/Abliteration.md"
+   ],
+   "link_hops": [
+    {
+     "to": "concepts/Abliteration.md",
+     "from": "posts/Pasan Gimhana - For about 5 and 5½ minutes, you can strip almost.md"
+    }
+   ],
+   "greps": []
+  },
+  "steps": 3,
+  "cost_usd": 0.1557056,
+  "seconds": 10.7,
+  "tokens_in": 70603,
+  "tokens_cached": 34056
+ },
+ "html-medium": {
+  "question": "Which of my sources tell me to ask Claude for an HTML page instead of reading text or documents? Do they agree on anything else?",
+  "kind": "aggregation (no shared concept)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Grep",
+    "target": "HTML|pictures|image"
+   },
+   {
+    "tool": "Read",
+    "target": "posts/Ruben Hassid - It's crazy how my entire Linkedin feed is about Claude,.md"
+   },
+   {
+    "tool": "Grep",
+    "target": "HTML"
+   },
+   {
+    "tool": "Read",
+    "target": "videos/How The 1 AI Engineer in The World Actually Uses AI.md"
+   }
+  ],
+  "answer": "Two of your sources tell you to ask for HTML.\n\n- **Ruben Hassid's LinkedIn post** says to stop asking for Word, PowerPoint or PDF files and add \"Make it an HTML page.\" to your prompt. [[posts/Ruben Hassid - It's crazy how my entire Linkedin feed is about Claude,]]\n- **How The #1 AI Engineer in The World Actually Uses AI** (Nick Saraev, on Karpathy) says to ask for a diagram, HTML page or video instead of reading explanations. [[videos/How The 1 AI Engineer in The World Actually Uses AI@01:34]]\n\nThey agree on a few other points:\n- **Opus on medium:** Hassid says Opus 5.5 on Medium suits most tasks, and to avoid High and Max. [[posts/Ruben Hassid - It's crazy how my entire Linkedin feed is about Claude,]] The video has Opus on medium orchestrating Sonnet subagents. [[videos/How The 1 AI Engineer in The World Actually Uses AI@03:30]]\n- **Short setup:** Hassid wants you to delete custom instructions and skills and keep your prompts simple. The video says short, vague prompts beat long requirement lists. [[videos/How The 1 AI Engineer in The World Actually Uses AI@00:57]] That is a loose match. Hassid also opens chats with a goal-and-context prompt, which sits awkwardly with \"vague\".\n\nThe video's note flags the short-prompt claim as contested, because Karpathy publicly urges giving models more context. Both sources are marked as unsourced or secondhand opinion, with mixed trust.",
+  "score": {
+   "facts_found": 4,
+   "facts_total": 4,
+   "facts": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "required_cited": 2,
+   "required_total": 2,
+   "missing_notes": [],
+   "cited": [
+    "posts/Ruben Hassid - It's crazy how my entire Linkedin feed is about Claude,.md",
+    "videos/How The 1 AI Engineer in The World Actually Uses AI.md"
+   ],
+   "opened": [
+    "posts/Ruben Hassid - It's crazy how my entire Linkedin feed is about Claude,.md",
+    "videos/How The 1 AI Engineer in The World Actually Uses AI.md"
+   ],
+   "link_hops": [],
+   "greps": [
+    "HTML|pictures|image",
+    "HTML"
+   ]
+  },
+  "steps": 5,
+  "cost_usd": 0.0468833,
+  "seconds": 14.1,
+  "tokens_in": 145051,
+  "tokens_cached": 139773
+ },
+ "claude-md-rules": {
+  "question": "The X course about running a company with 50 agents says to put hard rules in CLAUDE.md. Does anything else I saved disagree with relying on CLAUDE.md for rules like that? What does it suggest instead?",
+  "kind": "contradiction across sources",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course).md"
+   },
+   {
+    "tool": "Read",
+    "target": "posts/Patrick Kamtchueng Kom - Une règle écrite dans votre CLAUDE md, Claude peut l'ignorer.md"
+   }
+  ],
+  "answer": "Yes. The LinkedIn post by Patrick Kamtchueng Kom disagrees. It says a \"never\" rule in CLAUDE.md is only a request that Claude may ignore, and it suggests a hook instead. His view is that anything that must hold every time belongs in a hook. A hook fires on an event, so the agent doesn't have to decide to obey it. [[posts/Patrick Kamtchueng Kom - Une règle écrite dans votre CLAUDE md, Claude peut l'ignorer]]\n\n- He cites Anthropic's docs, which describe a rule like \"never modify .env\" in CLAUDE.md or a skill as a request with no guarantee. [[posts/Patrick Kamtchueng Kom - Une règle écrite dans votre CLAUDE md, Claude peut l'ignorer]]\n- He found 9 \"never\" lines in his own 181-line CLAUDE.md, and none was protected by a hook. [[posts/Patrick Kamtchueng Kom - Une règle écrite dans votre CLAUDE md, Claude peut l'ignorer]]\n- The **yurshev** course advises putting hard rules like \"Never send an email without my approval\" at the top of CLAUDE.md. [[xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course)]]\n- The course does not mention hooks. Its other safeguards are approval gates on sending, paying and publishing, and giving each agent only the tools it needs. [[xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course)]]\n- The hook idea is also covered in the concept note **Pre-tool-call hook**. [[concepts/Pre-tool-call hook]]",
+  "score": {
+   "facts_found": 4,
+   "facts_total": 4,
+   "facts": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "required_cited": 2,
+   "required_total": 2,
+   "missing_notes": [],
+   "cited": [
+    "posts/Patrick Kamtchueng Kom - Une règle écrite dans votre CLAUDE md, Claude peut l'ignorer.md",
+    "xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course).md",
+    "concepts/Pre-tool-call hook.md"
+   ],
+   "opened": [
+    "xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course).md",
+    "posts/Patrick Kamtchueng Kom - Une règle écrite dans votre CLAUDE md, Claude peut l'ignorer.md"
+   ],
+   "link_hops": [],
+   "greps": []
+  },
+  "steps": 3,
+  "cost_usd": 0.0567363,
+  "seconds": 10.1,
+  "tokens_in": 77439,
+  "tokens_cached": 67003
+ },
+ "decision-models": {
+  "question": "Three things I saved are about cheap models that can only pick from a fixed list of answers. What is each one, what does it cost or how fast is it, and what does the trading desk use it for?",
+  "kind": "comparison (3 sources, one concept)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "concepts/Decision model.md"
+   },
+   {
+    "tool": "Read",
+    "target": "xposts/AI Pirate - AI Trading Desk-in-a-Box Full 12-Step Roadmap to Connect Grok Bot.md"
+   },
+   {
+    "tool": "Read",
+    "target": "videos/The one OpenAI announcement that can actually make you money.md"
+   },
+   {
+    "tool": "Read",
+    "target": "videos/10 Levels of Jev For Agentic Engineers.md"
+   }
+  ],
+  "answer": "The three saved items cover the same idea, a small model that can only pick from a list you give it. The trading desk uses it only as the decision step between research and order placement.\n\n- **OpenAI's Decisions API.** In [[videos/The one OpenAI announcement that can actually make you money]], a tiny Luna model returns one answer from a fixed list in a few hundred milliseconds. It needs no JSON parsing or retry loop and can't answer outside the list. [[videos/The one OpenAI announcement that can actually make you money@03:15]] The video gives no price for it.\n- **Jev (Type-Safe AI).** In [[videos/10 Levels of Jev For Agentic Engineers]], Jev is a JSON-driven classifier, not an LLM. It is priced at about $20 per million calls. The video puts a comparable million-call workload on Fable 5.1 at roughly $11,000, about 600x more. [[videos/10 Levels of Jev For Agentic Engineers@02:13]] The AI Pirate post lists input at $0.042 per million tokens with no metered output. [[xposts/AI Pirate - AI Trading Desk-in-a-Box Full 12-Step Roadmap to Connect Grok Bot]]\n- **Gliner 2.5 Decide (Fastino).** This is the open-weight version of the same idea. The notes give no cost or speed for it. [[concepts/Decision model]]\n\n**In the trading desk:** Grok Bot does the research and Freqtrade is the only part that can place orders. Jev handles the choices in between. [[xposts/AI Pirate - AI Trading Desk-in-a-Box Full 12-Step Roadmap to Connect Grok Bot]]\n- It routes the next step to SCOUT, CHART, trading_bot, stand_down or human_review.\n- It gates signals as accept, verify_more or reject.\n- It reviews closed trades as closed_as_planned, verify_more or mismatch.\n- It guards risky actions as allow, confirm, human_review or deny.\n\nThe post says the output format is guaranteed but the judgment can still be wrong.",
+  "score": {
+   "facts_found": 5,
+   "facts_total": 5,
+   "facts": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "required_cited": 3,
+   "required_total": 3,
+   "missing_notes": [],
+   "cited": [
+    "videos/The one OpenAI announcement that can actually make you money.md",
+    "videos/10 Levels of Jev For Agentic Engineers.md",
+    "xposts/AI Pirate - AI Trading Desk-in-a-Box Full 12-Step Roadmap to Connect Grok Bot.md",
+    "concepts/Decision model.md"
+   ],
+   "opened": [
+    "concepts/Decision model.md",
+    "xposts/AI Pirate - AI Trading Desk-in-a-Box Full 12-Step Roadmap to Connect Grok Bot.md",
+    "videos/The one OpenAI announcement that can actually make you money.md",
+    "videos/10 Levels of Jev For Agentic Engineers.md"
+   ],
+   "link_hops": [
+    {
+     "to": "xposts/AI Pirate - AI Trading Desk-in-a-Box Full 12-Step Roadmap to Connect Grok Bot.md",
+     "from": "concepts/Decision model.md"
+    },
+    {
+     "to": "videos/The one OpenAI announcement that can actually make you money.md",
+     "from": "concepts/Decision model.md"
+    },
+    {
+     "to": "videos/10 Levels of Jev For Agentic Engineers.md",
+     "from": "concepts/Decision model.md"
+    }
+   ],
+   "greps": []
+  },
+  "steps": 5,
+  "cost_usd": 0.07632370000000001,
+  "seconds": 12.4,
+  "tokens_in": 81479,
+  "tokens_cached": 66937
+ },
+ "wifi-walls": {
+  "question": "In the video where cheap ESP32 boards learned to recognise movements from WiFi, what accuracy did they get? Which other videos cover the same sensing idea, and are any of their through-wall claims disputed?",
+  "kind": "chain (note, concept, other notes)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "videos/I Turned My Wi-Fi Into a Surveillance System.md"
+   },
+   {
+    "tool": "Read",
+    "target": "videos/AI Can See Without Cameras. WiFi Was Just the Beginning.md"
+   },
+   {
+    "tool": "Read",
+    "target": "videos/Your WiFi Can See You. Here's How.md"
+   }
+  ],
+  "answer": "In **I Turned My Wi-Fi Into a Surveillance System** (Better Stack), three $10 ESP32-S3 boards recognised eight movements 79.5% of the time live, which the spoiler rounds to about 80% ([[videos/I Turned My Wi-Fi Into a Surveillance System@06:17]]).\n- Per movement, jumping scored 97% and sitting 93%. Waving scored only 13% and was usually mistaken for jumping ([[videos/I Turned My Wi-Fi Into a Surveillance System@06:17]]).\n- Presence detection was easiest, at 96%. The video says WiFi passes through walls ([[videos/I Turned My Wi-Fi Into a Surveillance System@07:35]]).\n- It also says RuView's 82% pose accuracy drops to 11% in an unseen room, and that RuView's skeleton demo comes from the webcam with the WiFi part simulated ([[videos/I Turned My Wi-Fi Into a Surveillance System@03:10]], [[videos/I Turned My Wi-Fi Into a Surveillance System@03:29]]).\n\nTwo other videos cover the same idea, both by Bilawal Sidhu:\n- **Your WiFi Can See You. Here's How.** claims WiFi alone can reconstruct full body pose through walls. That claim is flagged ⚠ contested, because the CMU paper tested in-room, not through walls ([[videos/Your WiFi Can See You. Here's How.@01:37]]).\n- **AI Can See Without Cameras. WiFi Was Just the Beginning.** covers radar sensing. Its through-wall heartbeat claim (24 GHz radar, 95% accuracy through wood and brick) is not flagged ([[videos/AI Can See Without Cameras. WiFi Was Just the Beginning.@04:23]]). The disputed claim there is different: the CIA \"Ghost Murmur\" heartbeat magnetic-field story, which physicists say is undetectable beyond centimetres ([[videos/AI Can See Without Cameras. WiFi Was Just the Beginning.@11:50]]).\n\nThe shared idea is covered in [[concepts/RF sensing]].",
+  "score": {
+   "facts_found": 4,
+   "facts_total": 4,
+   "facts": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "required_cited": 3,
+   "required_total": 3,
+   "missing_notes": [],
+   "cited": [
+    "videos/I Turned My Wi-Fi Into a Surveillance System.md",
+    "videos/Your WiFi Can See You. Here's How.md",
+    "videos/AI Can See Without Cameras. WiFi Was Just the Beginning.md",
+    "concepts/RF sensing.md"
+   ],
+   "opened": [
+    "videos/I Turned My Wi-Fi Into a Surveillance System.md",
+    "videos/AI Can See Without Cameras. WiFi Was Just the Beginning.md",
+    "videos/Your WiFi Can See You. Here's How.md"
+   ],
+   "link_hops": [],
+   "greps": []
+  },
+  "steps": 4,
+  "cost_usd": 0.040523,
+  "seconds": 12.0,
+  "tokens_in": 72680,
+  "tokens_cached": 66910
+ },
+ "adsb": {
+  "question": "Two videos use plane tracking data for completely different things. Which videos, and what does each do with it?",
+  "kind": "comparison (one concept, two uses)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "concepts/ADS-B.md"
+   }
+  ],
+  "answer": "The two videos are **God's Eye View Just Got a Massive Upgrade** and **I discovered a sound that leaks your exact location (and it's everywhere)**.\n\n- **God's Eye View Just Got a Massive Upgrade** (Bilawal Sidhu) uses plane tracking as a live and replay layer in a 3D globe app. You can plug in your own SDR to see planes overhead ([[videos/God's Eye View Just Got a Massive Upgrade@15:08]]). You can also use ADS-B tracks to reconstruct an incident flight in 3D, first person ([[videos/God's Eye View Just Got a Massive Upgrade@16:23]]).\n- **I discovered a sound that leaks your exact location** (colsto) uses plane tracking as ground truth for geolocating a recording. It matches a full day of US ADS-B tracks against the Doppler curves of propeller planes heard in the audio ([[videos/I discovered a sound that leaks your exact location (and it's everywhere)@02:42]]). That pinpointed a security camera within a few hundred feet ([[concepts/ADS-B]]).\n\nSo one video visualizes flights, and the other uses the flight data to work out where a sound was recorded.",
+  "score": {
+   "facts_found": 4,
+   "facts_total": 4,
+   "facts": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "required_cited": 2,
+   "required_total": 2,
+   "missing_notes": [],
+   "cited": [
+    "videos/God's Eye View Just Got a Massive Upgrade.md",
+    "videos/I discovered a sound that leaks your exact location (and it's everywhere).md",
+    "concepts/ADS-B.md"
+   ],
+   "opened": [
+    "concepts/ADS-B.md"
+   ],
+   "link_hops": [],
+   "greps": []
+  },
+  "steps": 2,
+  "cost_usd": 0.0209579,
+  "seconds": 8.5,
+  "tokens_in": 69068,
+  "tokens_cached": 66899
+ },
+ "satellite": {
+  "question": "Which videos compare before-and-after satellite images, and what was each comparison used for? Did it work?",
+  "kind": "comparison (one concept, two uses)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "concepts/Satellite change detection.md"
+   },
+   {
+    "tool": "Read",
+    "target": "videos/Using Satellite Photos to Trade Stocks.md"
+   }
+  ],
+  "answer": "Two videos compare before-and-after satellite images. Only one of them gives a clear verdict.\n\n**Using Satellite Photos to Trade Stocks** (LosingLoonies) compared free Sentinel-2 images of the Cushing oil tanks from 2020 and 2025. The aim was to estimate tank fill levels from roof shadows, as a trading signal. It only partly worked. [[videos/Using Satellite Photos to Trade Stocks@02:12]]\n- Its estimate was -41%, while EIA data showed -63%. [[videos/Using Satellite Photos to Trade Stocks@02:12]]\n- Ground brightness had to be normalized out first. The raw difference was only -0.3%. [[videos/Using Satellite Photos to Trade Stocks@04:45]]\n- A backtest assumed perfect Cushing data. It lost money on crude but worked on tank owners. [[videos/Using Satellite Photos to Trade Stocks@08:13]]\n- On real satellite estimates, only 1 of 5 trades was profitable. The predicted change was -20M barrels against an actual -890k. [[videos/Using Satellite Photos to Trade Stocks@10:44]]\n- The video's own conclusion is that the estimate is too noisy to trade on yet. [[videos/Using Satellite Photos to Trade Stocks]]\n\n**God's Eye View Just Got a Massive Upgrade** (Bilawal Sidhu) has a keyless A/B comparison of recent 30 m imagery. It was used to show fire burn areas and Kharg Island damage. [[concepts/Satellite change detection]] It also names automatic in-browser change detection as a next goal. [[concepts/Satellite change detection]] I didn't open the video note itself, so I can't say how well the comparison worked beyond that.",
+  "score": {
+   "facts_found": 4,
+   "facts_total": 4,
+   "facts": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "required_cited": 1,
+   "required_total": 2,
+   "missing_notes": [
+    "videos/God's Eye View Just Got a Massive Upgrade.md"
+   ],
+   "cited": [
+    "videos/Using Satellite Photos to Trade Stocks.md",
+    "concepts/Satellite change detection.md"
+   ],
+   "opened": [
+    "concepts/Satellite change detection.md",
+    "videos/Using Satellite Photos to Trade Stocks.md"
+   ],
+   "link_hops": [
+    {
+     "to": "videos/Using Satellite Photos to Trade Stocks.md",
+     "from": "concepts/Satellite change detection.md"
+    }
+   ],
+   "greps": []
+  },
+  "steps": 3,
+  "cost_usd": 0.0284553,
+  "seconds": 10.3,
+  "tokens_in": 70255,
+  "tokens_cached": 66853
+ },
+ "rea": {
+  "question": "Two videos cover the same AI reverse-engineering tool. What is it, which old decompilers does it wrap, and do the two videos agree that it's a breakthrough?",
+  "kind": "agreement check (two videos, one tool)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "videos/I Tested The Viral Github Repo To Reverse Engineer Anything.md"
+   },
+   {
+    "tool": "Read",
+    "target": "videos/Every app on Earth is now open source... whether it likes it or not.md"
+   }
+  ],
+  "answer": "The tool is **REA (Reverse Engineer Anything)**, a GitHub repo that Nick Saraev and Fireship both cover. It's an MCP that gives AI agents decompilers. Saraev's video says it wraps three old ones: Ghidra, Hopper and IDA. Ghidra was released by the NSA in 2019, and IDA dates to the 1990s. [[videos/I Tested The Viral Github Repo To Reverse Engineer Anything@05:26]]\n\nThe two videos don't call it a breakthrough, but they come at it differently.\n\n- **Saraev**, in **I Tested The Viral Github Repo To Reverse Engineer Anything**, says it's \"hype more than breakthrough\". REA cloned Mac Preview almost identically, but he says agents can already copy a feature from screenshots alone. [[videos/I Tested The Viral Github Repo To Reverse Engineer Anything@09:16]]\n- **Fireship**, in **Every app on Earth is now open source... whether it likes it or not**, shows REA's Ghidra integration analysing Premiere's timeline from its installed files. [[videos/Every app on Earth is now open source... whether it likes it or not@03:09]]\n- Fireship stays sceptical about the results. The Artcraft Adobe clone is laggy and nowhere near Premiere's quality. [[videos/Every app on Earth is now open source... whether it likes it or not@01:53]]\n- Fireship's note names only Ghidra among the decompilers. [[videos/Every app on Earth is now open source... whether it likes it or not@03:29]]\n\nBoth videos are rated \"skim\" with signal 2/5.",
+  "score": {
+   "facts_found": 4,
+   "facts_total": 4,
+   "facts": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "required_cited": 2,
+   "required_total": 2,
+   "missing_notes": [],
+   "cited": [
+    "videos/I Tested The Viral Github Repo To Reverse Engineer Anything.md",
+    "videos/Every app on Earth is now open source... whether it likes it or not.md"
+   ],
+   "opened": [
+    "videos/I Tested The Viral Github Repo To Reverse Engineer Anything.md",
+    "videos/Every app on Earth is now open source... whether it likes it or not.md"
+   ],
+   "link_hops": [],
+   "greps": []
+  },
+  "steps": 3,
+  "cost_usd": 0.0299717,
+  "seconds": 10.0,
+  "tokens_in": 70745,
+  "tokens_cached": 66877
+ },
+ "subagents": {
+  "question": "The Karpathy video and the X course on 50 agents both use subagents. How does each one split the work between models or agents?",
+  "kind": "comparison (video vs X post)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "videos/How The 1 AI Engineer in The World Actually Uses AI.md"
+   },
+   {
+    "tool": "Read",
+    "target": "xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course).md"
+   }
+  ],
+  "answer": "The two split the work on different axes. The Karpathy video splits it by model cost and stage. The X course splits it by job.\n\n**Karpathy video** (**How The #1 AI Engineer in The World Actually Uses AI**): a cheap first pass feeds a stronger second tier.\n- A cheap filter, such as a regex that strips URLs and spam, runs first. The leftovers then go to Sonnet subagents. [[videos/How The 1 AI Engineer in The World Actually Uses AI@03:30]]\n- Opus on medium acts as the orchestrator and Sonnet does the subagent work. [[videos/How The 1 AI Engineer in The World Actually Uses AI@03:30]]\n- The video is a secondhand roundup, and its prompting advice partly misstates Karpathy's views. [[videos/How The 1 AI Engineer in The World Actually Uses AI]]\n\n**yurshev's course** (**50 AI Agents Run My Entire Company**): one subagent per job, with no model tiers described.\n- Each job gets its own subagent, defined as a file in `.claude/agents/`. An example is lead-finder, which saves 20 leads and never contacts anyone. [[xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course)]]\n- A lead agent plans and splits the work. The subagents run in parallel, each in its own folder or git worktree. The lead agent then reviews the results against your rules. [[xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course)]]\n- Claude decides, and Make's MCP connection acts in the real apps. [[xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course)]]\n\nBoth follow the orchestrator-and-workers pattern. [[concepts/Subagent orchestration]]",
+  "score": {
+   "facts_found": 4,
+   "facts_total": 4,
+   "facts": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "required_cited": 2,
+   "required_total": 2,
+   "missing_notes": [],
+   "cited": [
+    "videos/How The 1 AI Engineer in The World Actually Uses AI.md",
+    "xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course).md",
+    "concepts/Subagent orchestration.md"
+   ],
+   "opened": [
+    "videos/How The 1 AI Engineer in The World Actually Uses AI.md",
+    "xposts/yurshev - 50 AI Agents Run My Entire Company (Full Course).md"
+   ],
+   "link_hops": [],
+   "greps": []
+  },
+  "steps": 3,
+  "cost_usd": 0.053427100000000005,
+  "seconds": 9.4,
+  "tokens_in": 76670,
+  "tokens_cached": 66891
+ },
+ "osint-graph": {
+  "question": "What idea links the Black Hat talk on Wi-Fi positioning systems to the video about a sound that leaks your location? Which other videos in my brain share it?",
+  "kind": "graph hop (concept membership)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "concepts/Open-source intelligence.md"
+   },
+   {
+    "tool": "Read",
+    "target": "videos/Surveilling the Masses with Wi-Fi Positioning Systems.md"
+   },
+   {
+    "tool": "Read",
+    "target": "videos/I discovered a sound that leaks your exact location (and it's everywhere).md"
+   }
+  ],
+  "answer": "The idea that links them is **open-source intelligence (OSINT)**. Both videos locate things using public data, with no privileged access.\n\n- The Black Hat talk **Surveilling the Masses with Wi-Fi Positioning Systems** queries Apple's open Wi-Fi location API. It uses that to map routers and track where they move. Starlink router locations traced Ukraine's front lines. [[videos/Surveilling the Masses with Wi-Fi Positioning Systems@12:20]]\n- **I discovered a sound that leaks your exact location** matches inaudible plane Doppler curves in a recording against public ADS-B flight data. That placed a security camera within a few hundred feet. [[videos/I discovered a sound that leaks your exact location (and it's everywhere)@22:42]]\n- The concept note says the Wi-Fi talk adds router geolocation as a new OSINT source, and the sound video adds audio as one. [[concepts/Open-source intelligence]]\n\nOther videos sharing the OSINT idea:\n- **God's Eye View Just Got a Massive Upgrade** layers live public data (cameras, transit, satellite imagery, a plane feed) onto a 3D globe. [[concepts/Open-source intelligence]]\n- **Un hacker vexé a fait en une nuit ce que l'ARCOM a raté en 9 ans** uses Shodan's public scans, via a favicon hash, to find a hidden server. This is the offensive reconnaissance use of OSINT. [[concepts/Open-source intelligence]]",
+  "score": {
+   "facts_found": 3,
+   "facts_total": 3,
+   "facts": [
+    true,
+    true,
+    true
+   ],
+   "required_cited": 2,
+   "required_total": 4,
+   "missing_notes": [
+    "videos/God's Eye View Just Got a Massive Upgrade.md",
+    "videos/Un hacker vexé a fait en une nuit ce que l'ARCOM a raté en 9 ans.md"
+   ],
+   "cited": [
+    "videos/Surveilling the Masses with Wi-Fi Positioning Systems.md",
+    "videos/I discovered a sound that leaks your exact location (and it's everywhere).md",
+    "concepts/Open-source intelligence.md"
+   ],
+   "opened": [
+    "concepts/Open-source intelligence.md",
+    "videos/Surveilling the Masses with Wi-Fi Positioning Systems.md",
+    "videos/I discovered a sound that leaks your exact location (and it's everywhere).md"
+   ],
+   "link_hops": [
+    {
+     "to": "videos/Surveilling the Masses with Wi-Fi Positioning Systems.md",
+     "from": "concepts/Open-source intelligence.md"
+    },
+    {
+     "to": "videos/I discovered a sound that leaks your exact location (and it's everywhere).md",
+     "from": "concepts/Open-source intelligence.md"
+    }
+   ],
+   "greps": []
+  },
+  "steps": 4,
+  "cost_usd": 0.0383453,
+  "seconds": 10.0,
+  "tokens_in": 72699,
+  "tokens_cached": 66893
+ },
+ "control-catalog": {
+  "question": "How many agent-loop repos did that article about loop engineering study?",
+  "kind": "control (answerable from the catalog alone)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Read",
+    "target": "xposts/Ichigo - Harness, Loops, Graphs What 217 Real Agent Loops Are Missing.md"
+   }
+  ],
+  "answer": "The article studied **217** agent-loop repos. The researchers searched 36,487 actively maintained repositories and found 256 candidates. After inspecting them one by one, they confirmed 217, or 0.59% of the total. The article is **Harness, Loops, Graphs: What 217 Real Agent Loops Are Missing** by Ichigo [[xposts/Ichigo - Harness, Loops, Graphs What 217 Real Agent Loops Are Missing]]. It also feeds the [[concepts/Loop engineering]] concept.",
+  "score": {
+   "facts_found": 1,
+   "facts_total": 1,
+   "facts": [
+    true
+   ],
+   "required_cited": 1,
+   "required_total": 1,
+   "missing_notes": [],
+   "cited": [
+    "xposts/Ichigo - Harness, Loops, Graphs What 217 Real Agent Loops Are Missing.md",
+    "concepts/Loop engineering.md"
+   ],
+   "opened": [
+    "xposts/Ichigo - Harness, Loops, Graphs What 217 Real Agent Loops Are Missing.md"
+   ],
+   "link_hops": [],
+   "greps": []
+  },
+  "steps": 2,
+  "cost_usd": 0.0654447,
+  "seconds": 8.6,
+  "tokens_in": 80765,
+  "tokens_cached": 66907
+ },
+ "absent": {
+  "question": "Which video explained how Kubernetes autoscaling works?",
+  "kind": "control (not in the vault)",
+  "error": null,
+  "trace": [
+   {
+    "tool": "Grep",
+    "target": "Kubernetes|autoscal|k8s"
+   }
+  ],
+  "answer": "No video in your collection explains Kubernetes autoscaling. Searching the notes for \"Kubernetes\", \"autoscaling\" and \"k8s\" returned nothing.\n\nThe closest is **How to Replace Your Subscriptions with a Raspberry Pi**: [[videos/How to Replace Your Subscriptions with a Raspberry Pi]]. It covers running self-hosted services in Docker on a Raspberry Pi, so it deals with containers but not Kubernetes or scaling. The concept note [[concepts/Docker Compose]] covers the same container topic.",
+  "score": {
+   "facts_found": 0,
+   "facts_total": 0,
+   "facts": [],
+   "required_cited": 0,
+   "required_total": 0,
+   "missing_notes": [],
+   "cited": [
+    "videos/How to Replace Your Subscriptions with a Raspberry Pi.md",
+    "concepts/Docker Compose.md"
+   ],
+   "opened": [],
+   "link_hops": [],
+   "greps": [
+    "Kubernetes|autoscal|k8s"
+   ],
+   "said_absent": true
+  },
+  "steps": 2,
+  "cost_usd": 0.0152733,
+  "seconds": 7.5,
+  "tokens_in": 68236,
+  "tokens_cached": 66893
+ }
+}

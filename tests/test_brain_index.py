@@ -314,6 +314,15 @@ def test_cited_keeps_known_notes_in_order(snap):
     assert refs[ATTN]["ts"] == ["03:28–07:10", "04:00"]
 
 
+def test_cited_finds_a_note_cited_by_a_title_ending_with_a_dot(snap):
+    # Found by the Ask evaluation: Claude cites "Your WiFi Can See You. Here's How." by its title,
+    # but Windows drops the trailing dot from the file name, so the citation used to be lost.
+    note = ATTN[: -len(".md")]
+    refs = bi.cited(f"See [[{note}.@04:00]] and [[{note}. ]].", snap.note_refs())
+    assert list(refs) == [ATTN]
+    assert refs[ATTN]["ts"] == ["04:00"]
+
+
 # ---------------------------------------------------------------- the sample vault in examples/
 
 def test_examples_vault():
