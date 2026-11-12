@@ -8,6 +8,8 @@ timestamp links, a post's original text, change report and consistency checks. T
 vault layout itself is defined in schema.md.
 """
 
+__version__ = "1.0.0"  # same as extension/manifest.json; a release tag must match both
+
 import base64
 import difflib
 import hashlib
@@ -18,6 +20,7 @@ import queue
 import re
 import select
 import shutil
+import signal
 import socket
 import subprocess
 import sys
@@ -673,15 +676,23 @@ def build_post_prompt(job, post, note_path):
 
 # ---------------------------------------------------------------- claude
 
+# On macOS and Linux, Claude runs in a session of its own, so kill_tree can stop it and its children.
+CLAUDE_POPEN = {} if os.name == "nt" else {"start_new_session": True}
+
+
 def claude_binary():
+    """The Claude Code CLI: claude_path from config.json, else the native installer's copy in
+    ~/.local/bin (often missing from PATH when the server isn't started from a shell), else PATH."""
     if CFG["claude_path"]:
         return CFG["claude_path"]
-    native = Path.home() / ".local" / "bin" / "claude.exe"
-    if native.exists():
-        return str(native)
+    for native in (Path.home() / ".local" / "bin" / ("claude.exe" if os.name == "nt" else "claude"),
+                   Path.home() / ".claude" / "local" / "claude"):
+        if native.is_file() and (os.name == "nt" or os.access(native, os.X_OK)):
+            return str(native)
     found = shutil.which("claude")
     if not found:
-        raise RuntimeError("Claude Code CLI not found. Set claude_path in config.json.")
+        raise RuntimeError("Claude Code CLI not found. Install it (https://docs.claude.com/en/docs/claude-code/setup), "
+                           "or set claude_path in server/config.json.")
     return found
 
 
@@ -711,15 +722,21 @@ def run_claude(prompt, model, read_dirs=()):
         cmd += ["--model", model]
     for folder in read_dirs:  # a post's pictures, downloaded for this run (fetch_images)
         cmd += ["--add-dir", str(folder)]
-    proc = subprocess.run(
-        cmd, input=prompt.encode("utf-8"), cwd=VAULT, env=claude_env(), capture_output=True,
-        timeout=CFG["timeout_minutes"] * 60,
-    )
-    stdout = proc.stdout.decode("utf-8", errors="replace")
+    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                            cwd=VAULT, env=claude_env(), **CLAUDE_POPEN)
+    try:
+        out, err = proc.communicate(prompt.encode("utf-8"), timeout=CFG["timeout_minutes"] * 60)
+    except subprocess.TimeoutExpired:
+        # subprocess.run would kill only the direct child: the .cmd wrapper on Windows, so Claude
+        # kept running. Stop the whole tree instead.
+        kill_tree(proc)
+        raise RuntimeError(f"Claude was still running after {CFG['timeout_minutes']} minutes, so it was stopped. "
+                           "Raise timeout_minutes in server/config.json for very long videos.")
+    stdout = out.decode("utf-8", errors="replace")
     try:
         result = json.loads(stdout)
     except json.JSONDecodeError:
-        err = proc.stderr.decode("utf-8", errors="replace")
+        err = err.decode("utf-8", errors="replace")
         raise RuntimeError(f"claude exited {proc.returncode}: {(err or stdout)[-800:]}")
     if result.get("is_error"):
         raise RuntimeError(f"claude error: {str(result.get('result'))[-800:]}")
@@ -1218,13 +1235,19 @@ class PageGone(Exception):
 
 
 def kill_tree(proc):
-    """Stop a process and its children: on Windows, claude is a .cmd wrapper around node,
-    and killing only the wrapper would leave Claude running."""
-    if proc.poll() is not None:
-        return
+    """Stop a Claude process and everything it started. On Windows, claude is often a .cmd
+    wrapper around node, and killing only the wrapper would leave Claude running: taskkill /T
+    walks the tree. On macOS and Linux, Claude runs in its own session (CLAUDE_POPEN), so its
+    process group holds it and its children, even after the parent has exited."""
     if os.name == "nt":
-        subprocess.run(["taskkill", "/T", "/F", "/PID", str(proc.pid)], capture_output=True)
+        if proc.poll() is None:
+            subprocess.run(["taskkill", "/T", "/F", "/PID", str(proc.pid)], capture_output=True)
     else:
+        try:
+            os.killpg(proc.pid, signal.SIGKILL)
+        except (ProcessLookupError, PermissionError):
+            pass  # already gone, or not started in its own session
+    if proc.poll() is None:
         proc.kill()
     proc.wait()
 
@@ -1298,7 +1321,7 @@ def ask_brain(question, emit, page_closed, parent=None):
     result, other, read = None, [], []
     try:
         proc = subprocess.Popen(ask_command(system_file), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT, cwd=VAULT, env=claude_env())
+                                stderr=subprocess.STDOUT, cwd=VAULT, env=claude_env(), **CLAUDE_POPEN)
     except OSError:
         system_file.unlink(missing_ok=True)
         raise
@@ -1532,7 +1555,7 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(403, {"error": "forbidden origin"})
         u = urllib.parse.urlparse(self.path)
         if u.path == "/health":
-            return self._send(200, {"ok": True, "vault": CFG["vault_name"], "queued": JOB_QUEUE.qsize(),
+            return self._send(200, {"ok": True, "version": __version__, "vault": CFG["vault_name"], "queued": JOB_QUEUE.qsize(),
                                     # "videos": 37, "posts": 10, … one count per source
                                     **{s["many"]: len(list(NOTE_DIRS[k].glob("*.md"))) for k, s in SOURCES.items()},
                                     "concepts": len(list(CONCEPTS.glob("*.md")))})
@@ -1737,7 +1760,7 @@ def main():
     # Pictures left by a run that was cut short (the server closed mid-run). Only once the port is
     # ours, so a second copy started by mistake never deletes a running server's pictures.
     shutil.rmtree(DATA / "attachments", ignore_errors=True)
-    log(f"Feed Brain listening on http://127.0.0.1:{CFG['port']}")
+    log(f"Feed Brain {__version__} listening on http://127.0.0.1:{CFG['port']}")
     log(f"vault: {VAULT}  model: {CFG['model']} (posts: {CFG['post_model']})  web check: {CFG['web_check']}")
     log(f"dashboard, graph and search: http://127.0.0.1:{CFG['port']}/")
     try:

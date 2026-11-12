@@ -4,23 +4,27 @@
 
 ## What you need
 
-- **Windows.** The server is plain Python and should run elsewhere, but `start.cmd` and the process handling have only been used on Windows 11.
-- **Python 3.10+** on your PATH.
-- **Google Chrome** (or another Chromium browser that loads unpacked extensions).
+- **macOS, Linux or Windows.** The tests run on all three on every push. Daily use so far has been on Windows 11.
+- **Python 3.10+.** On macOS, the `python3` that ships with the system is too old: `brew install python`. On Debian and Ubuntu, also `sudo apt install python3-venv`.
+- **Google Chrome** (or another Chromium browser that loads unpacked extensions: Edge, Brave, Chromium).
 - **[Claude Code](https://docs.claude.com/en/docs/claude-code/overview)**, signed in (`claude`, then `/login`). Every run is a headless `claude -p` call on your own Claude subscription: there is no API key to set.
 - **[Obsidian](https://obsidian.md)** to read the notes. It's optional: the vault is plain Markdown, and the web app reads it on its own.
 
 ## Setup (once)
 
 1. **Make a folder for the vault**, empty or inside an Obsidian vault you already have, e.g. `Documents/feed-brain`.
-2. **Start the server:** double-click `server/start.cmd`. The first time, it creates `server/config.json` and opens it in Notepad: set `vault_path` to that folder, save, and run `start.cmd` again. It creates a Python environment, installs the two dependencies (`youtube-transcript-api`, `yt-dlp`) and copies the default `schema.md` into the vault. Leave the window open. Only one server can run at a time; a second one refuses to start.
-   To start it with Windows, press Win+R, type `shell:startup`, and put a shortcut to `start.cmd` in that folder.
+2. **Start the server:**
+   - **macOS and Linux:** run `./server/start.sh` in a terminal. On a Mac you can also double-click `server/start.command` in Finder.
+   - **Windows:** double-click `server/start.cmd`.
+
+   The first time, it creates `server/config.json` (and opens it, on Windows and macOS): set `vault_path` to that folder, save, and start it again. It creates a Python environment in `server/.venv`, installs the two dependencies (`youtube-transcript-api`, `yt-dlp`) and copies the default `schema.md` into the vault. Leave the window open. Only one server can run at a time; a second one refuses to start.
+   To start it when you log in: on Windows, press Win+R, type `shell:startup` and put a shortcut to `start.cmd` there; on macOS, add `start.command` to *System Settings → General → Login Items*; on Linux, add `start.sh` to your desktop's startup applications.
 3. **Load the extension:** open `chrome://extensions`, turn on *Developer mode*, click *Load unpacked* and pick `extension/`. To update it later, click the reload icon on its card.
 4. Open the vault folder in Obsidian, and **http://127.0.0.1:8765/** for the dashboard.
 
 ## Use
 
-- On a video, click the icon and then **Spoil it into my vault**. You can add a focus first, e.g. *"only the eval part"*. You can also press **Alt+Shift+Y**.
+- On a video, click the icon and then **Spoil it into my vault**. You can add a focus first, e.g. *"only the eval part"*. You can also press **Alt+Shift+Y** (**Option+Shift+Y** on a Mac).
 - The badge counts running jobs. When a job is done, you get a notification with the verdict and something like "3 new concepts · 2 updated".
 - The popup lists recent runs. Expand a run to see every note it created or updated, each with a link that opens it in Obsidian: a new concept shows its summary, an updated one shows `+N lines` and which fields changed. Warnings appear there in amber.
 - `_log.md` in the vault keeps the same history permanently.
@@ -34,7 +38,7 @@ A 30-minute video takes about 3 minutes with Opus.
 
 | Key | Default | What it does |
 |---|---|---|
-| `vault_path` / `vault_name` | `~/Documents/feed-brain` / `feed-brain` | The vault folder / the name used in `obsidian://` links |
+| `vault_path` / `vault_name` | `~/Documents/feed-brain` / the folder's name | The vault folder / the vault's name in Obsidian, for `obsidian://` links. Set it only if Obsidian knows the vault by another name |
 | `model` | `opus` | The model that writes video notes. `sonnet` is faster and uses less of your plan |
 | `post_model` | `sonnet` | The model that writes LinkedIn and X post notes |
 | `language` | `English` | Language the notes are written in, whatever the video's language |
@@ -42,7 +46,7 @@ A 30-minute video takes about 3 minutes with Opus.
 | `web_check` | `true` | `false` = no web search; claims are rated from Claude's own knowledge |
 | `catalog_limit` | `300` | Maximum number of concepts put in the prompt |
 | `timeout_minutes` | `20` | A run that takes longer is stopped |
-| `claude_path` | `null` | Where the `claude` CLI is, if it isn't on your PATH |
+| `claude_path` | `null` | Where the `claude` CLI is. Leave it empty: the server finds the native installer's copy in `~/.local/bin`, then looks on your PATH |
 | `git_sync` / `git_sync_minutes` | `true` / `10` | Commit, pull and push the vault (if it's a git repo with a remote), and how often while idle |
 | `ask_model` | `sonnet` | The model that answers *Ask the brain* questions |
 | `ask_max_turns` | `12` | How many reading steps an *Ask the brain* answer may take before it's stopped |

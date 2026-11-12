@@ -1,6 +1,6 @@
 {
   "vault_path": "~/Documents/feed-brain",
-  "vault_name": "feed-brain",
+  "vault_name": null,
   "port": 8765,
   "model": "opus",
   "post_model": "sonnet",

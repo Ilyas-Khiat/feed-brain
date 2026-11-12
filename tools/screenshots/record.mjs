@@ -24,7 +24,10 @@ if (!scriptFile || !outDir) { console.error("usage: node record.mjs <demo.json> 
 const demo = JSON.parse(readFileSync(scriptFile, "utf8"));
 mkdirSync(outDir, { recursive: true });
 const BASE = process.env.BASE || "http://127.0.0.1:8766/";
-const CHROME = process.env.CHROME || "C:/Program Files/Google/Chrome/Application/chrome.exe";
+const CHROME = process.env.CHROME || {
+  win32: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  darwin: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+}[process.platform] || "google-chrome"; // Linux: google-chrome, or set CHROME=chromium
 const PORT = Number(process.env.CDP_PORT || 9334);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 

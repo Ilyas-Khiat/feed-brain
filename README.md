@@ -145,11 +145,16 @@ The interesting part of this project is less the LLM call than what's built arou
 
 ## Quickstart
 
-Needs Windows, Python 3.10+, Chrome and [Claude Code](https://docs.claude.com/en/docs/claude-code/overview), signed in.
+Runs on **macOS, Linux and Windows**. Needs Python 3.10+, Chrome (or another Chromium browser) and [Claude Code](https://docs.claude.com/en/docs/claude-code/overview), signed in.
 
-1. Clone this repository and double-click `server/start.cmd`. The first time, it creates `server/config.json`: set `vault_path` to an empty folder (or a folder inside your Obsidian vault) and run it again.
-2. In `chrome://extensions`, turn on *Developer mode*, click *Load unpacked* and pick `extension/`.
-3. Open a YouTube video, click the extension and press **Spoil it into my vault**. The dashboard is at **http://127.0.0.1:8765/**.
+1. **Get it:** download `feed-brain-<version>.zip` from the [latest release](https://github.com/Ilyas-Khiat/feed-brain/releases/latest) and unzip it, or clone this repository.
+2. **Start the server.** On macOS and Linux:
+   ```bash
+   bash server/start.sh
+   ```
+   On Windows, double-click `server\start.cmd`. The first time, it creates `server/config.json`: set `vault_path` to an empty folder (or a folder inside your Obsidian vault) and start it again.
+3. **Load the extension:** in `chrome://extensions`, turn on *Developer mode*, click *Load unpacked* and pick `extension/`.
+4. Open a YouTube video, click the extension and press **Spoil it into my vault**. The dashboard is at **http://127.0.0.1:8765/**.
 
 [`examples/`](examples/) shows what a run produces: a [video note](examples/videos/Large%20Language%20Models%20explained%20briefly.md), the [concept notes](examples/concepts/) it filed, the [catalog](examples/_catalog.md) and the [run log](examples/_log.md).
 

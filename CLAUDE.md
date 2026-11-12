@@ -21,8 +21,8 @@ A Chrome extension and a local Python server that turn YouTube videos and Linked
 - **This repo is public; the vault is private.** Never commit notes, fixtures or screenshots from the real vault, or anything from `server/data/`, without the user's explicit OK. Never write the user's personal details (emails, account names, local paths) into files here.
 - **Branches.** New work goes on a branch off `main`. Merge and push only when the user asks.
 - **Claims must match data.** README numbers come from `server/data/*.jsonl` (medians, with the run count). Don't describe a capability as shown when the logs don't show it.
-- **Windows first.** `.cmd` files keep CRLF. Run Python with `server/.venv/Scripts/python`, never `python -I`.
+- **macOS, Linux and Windows.** Every change must work on all three: CI runs the tests and a launcher smoke test on each. Start Claude with `**CLAUDE_POPEN` and stop it with `kill_tree` (process group on macOS/Linux, `taskkill /T` on Windows). `start.cmd` keeps CRLF; `start.sh` and `start.command` keep LF and the executable bit. The venv's Python is `server/.venv/bin/python` (`Scripts/python` on Windows); never run it with `-I`.
 
 ## Checking a change
 
-`server/.venv/Scripts/python -m pytest` (no Claude calls, no network; `pip install -r server/requirements-dev.txt` first), `node --check` on changed JS, then the dev server: dashboard, graph, a search. For prompt or run changes, one cheap capture on the dev server (`--model sonnet`). New pure logic gets a test in `tests/`; never build a fixture from the real vault.
+`server/.venv/bin/python -m pytest` (`Scripts/python` on Windows) (no Claude calls, no network; `pip install -r server/requirements-dev.txt` first), `node --check` on changed JS, then the dev server: dashboard, graph, a search. For prompt or run changes, one cheap capture on the dev server (`--model sonnet`). New pure logic gets a test in `tests/`; never build a fixture from the real vault.
