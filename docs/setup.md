@@ -30,7 +30,7 @@
 - `_log.md` in the vault keeps the same history permanently.
 - **Shorts** work the same way: open one (`youtube.com/shorts/…`) and use the popup or Alt+Shift+Y. Its note is budgeted like a one-minute video (3 claims, ~125 words) and links to it as a normal video. A Short that's only music has almost no transcript, so its note has little to say.
 - Sending a video that's already in the vault gives you its link, with a *process again* option. That rewrites the note from scratch and replaces the video's entries in the concept notes.
-- LinkedIn and X posts go in when you save, like or right-click them: see [Sources](sources.md).
+- LinkedIn and X posts go in when you save or bookmark them, or right-click them. Likes and reposts send them too, unless you switch that off in the popup: see [Sources](sources.md).
 
 A 30-minute video takes about 3 minutes with Opus.
 

@@ -1,7 +1,7 @@
 # Roadmap
 
 What's next, in the order it would pay off. Done so far: video capture, the dashboard, graph,
-search and Ask the brain, LinkedIn and X capture (posts you save, react to or right-click),
+search and Ask the brain, LinkedIn and X capture (posts you save, bookmark, right-click or react to),
 YouTube Shorts, X articles, the pictures and LinkedIn documents in posts, and posts in the web
 app next to videos (dashboard, graph, search, Ask).
 

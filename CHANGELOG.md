@@ -13,7 +13,7 @@ First public release.
 
 ### Capture
 - One click on a YouTube video (or a Short) turns it into a note sized to the video: a spoiler, 3 to 8 key claims with an example and a timestamp link each, the sources it cites, and a verdict.
-- LinkedIn and X posts go in when you save, like, repost or right-click them, including X articles and the pictures and documents in posts.
+- LinkedIn and X posts go in when you save or bookmark them, or right-click them (likes and reposts too, unless switched off in the popup), including X articles and the pictures and documents in posts.
 - Ideas are filed into shared concept notes, and the main claims are checked on the web.
 - Every run is checked afterwards: unfinished sections, word budget, broken links, rewording, edits outside the allowed folders.
 

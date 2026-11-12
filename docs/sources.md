@@ -10,10 +10,10 @@ The extension also reads LinkedIn, so the posts you keep end up next to your vid
 
 **Sending a post.** Nothing to remember: a post goes to your brain when you
 - **save** it (the *Save* item in the post's `…` menu), or
-- **react** to it (Like, or any reaction from the picker; taking a reaction back doesn't count), or
-- **right-click** it and pick *Send this post to your brain*, or open the popup on a single post's page.
+- **right-click** it and pick *Send this post to your brain*, or open the popup on a single post's page, or
+- **react** to it (Like, or any reaction from the picker; taking a reaction back doesn't count).
 
-Saves and reactions can each be turned off in the popup, which only shows these settings on LinkedIn. Each time, a short message at the bottom of the LinkedIn page says what happened: sent, already in your brain, or why it couldn't be sent. Windows can hide Chrome's notifications, so this message is the one to watch. The badge counts the posts being written, and each finished post also gives a silent notification. A post you already sent isn't sent again.
+Saves and reactions can each be turned off in the popup, which only shows these settings on LinkedIn. Both are on at first: switch reactions off if you like posts you don't want to keep. Each time, a short message at the bottom of the LinkedIn page says what happened: sent, already in your brain, or why it couldn't be sent. Windows can hide Chrome's notifications, so this message is the one to watch. The badge counts the posts being written, and each finished post also gives a silent notification. A post you already sent isn't sent again.
 
 **The post note** (`posts/<author> - <start of the post>.md`) is shorter than a video's, since you've already read the post:
 - a one-line **gist**, naming the specific thing rather than the topic
@@ -32,7 +32,7 @@ A vault created before posts existed has no post template in its `schema.md`, so
 
 ## X posts
 
-X posts work like LinkedIn posts, in their own folder (`xposts/`) and colour (green). A post goes to your brain when you **bookmark** it, **like** it or **repost** it (each can be turned off in the popup on x.com), when you **right-click** it and pick *Send this post to your brain*, or from the popup on a post's own page. The same message at the bottom of the page says what happened.
+X posts work like LinkedIn posts, in their own folder (`xposts/`) and colour (green). A post goes to your brain when you **bookmark** it, when you **right-click** it and pick *Send this post to your brain*, or from the popup on a post's own page. **Liking** or **reposting** it sends it too; each can be turned off in the popup on x.com. The same message at the bottom of the page says what happened.
 
 The note is a post note, like LinkedIn's: a gist, 0–3 claims, the links, concepts, a keep/noise verdict, and the original text, including a quoted post. Only a few frontmatter fields differ. An X post has its `handle`, its `url` is always the post itself, its `post_id` is its number on X, and its publication date comes from that number. It runs on Sonnet, like LinkedIn posts (about 45 seconds and $0.15 with this vault).
 

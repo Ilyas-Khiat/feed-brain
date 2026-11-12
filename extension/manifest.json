@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Feed Brain",
   "version": "1.0.0",
-  "description": "Send the current YouTube video, or the posts you save and react to on LinkedIn and X, to your Obsidian vault as short, cross-referenced notes.",
+  "description": "Send a YouTube video, or a LinkedIn or X post you save, bookmark or right-click, to your Obsidian vault as short linked notes.",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",

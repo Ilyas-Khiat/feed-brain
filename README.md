@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>A second brain that fills itself.</b><br>
-  One click on a YouTube video, or a like on LinkedIn or X, and Claude turns it into a note you can read in a minute,<br>
+  One click on a YouTube video, or a save or right-click on a LinkedIn or X post, and Claude turns it into a note you can read in a minute,<br>
   links it to every idea you met before, checks its claims on the web, and lets you ask your whole history questions.
 </p>
 
@@ -29,7 +29,7 @@ I watch a lot of technical video as a first pass before reading papers, and with
 
 | | |
 |---|---|
-| **1. Capture** | Click the extension on a YouTube video (or press Alt+Shift+Y). On LinkedIn and X, saving, liking or reposting a post is enough: you don't change anything about how you browse. |
+| **1. Capture** | Click the extension on a YouTube video (or press Alt+Shift+Y). On LinkedIn and X, saving or bookmarking a post is enough, or right-click it and pick *Send this post to your brain*. Likes and reposts send it too, unless you switch that off in the popup. You don't change anything about how you browse. |
 | **2. Distill** | Claude writes a note sized to the video: a spoiler, 3 to 8 key claims each with an example and a timestamp link, the sources the video cites, and a verdict (*watch*, *skim* or *skip*). A 20-minute video becomes about 250 words. |
 | **3. Connect** | The ideas go into shared **concept notes**. The tenth video about attention updates the *Attention* note rather than making a new one, so knowledge builds up instead of piling up. |
 | **4. Check** | The claims that matter most are web-searched. A disputed one gets a ⚠ flag and a source, and the note gets a trust rating. |
